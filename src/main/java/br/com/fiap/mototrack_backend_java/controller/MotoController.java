@@ -4,6 +4,9 @@ import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
 import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
+import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
+import br.com.fiap.mototrack_backend_java.model.enums.Status;
+import br.com.fiap.mototrack_backend_java.model.enums.TipoDepartamento;
 import br.com.fiap.mototrack_backend_java.service.MotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,27 +27,13 @@ public class MotoController {
     private MotoService motoService;
 
     @GetMapping
-    public String listarTodos(Model model) {
-        var motos = motoService.listarTodos();
-
-        // Para cada moto, já ordenamos e limitamos as movimentações para as últimas 5
-        motos.forEach(moto -> {
-            List<Movimentacao> ultimasMovimentacoes = moto.getMovimentacoes()
-                    .stream()
-                    .sorted(Comparator.comparing(Movimentacao::getDataMovimentacao).reversed())
-                    .limit(5)
-                    .toList();
-            moto.setMovimentacoes(ultimasMovimentacoes); // substitui a lista original
-        });
-
-        motos.forEach(moto -> {
-            List<Alerta> ultimosAlertas = moto.getAlertas()
-                    .stream()
-                    .sorted(Comparator.comparing(Alerta::getDataAlerta).reversed())
-                    .limit(5)
-                    .toList();
-            moto.setAlertas(ultimosAlertas); // substitui a lista original
-        });
+    public String listarTodos(
+            @RequestParam(required = false) String placa,
+            @RequestParam(required = false) String chassi,
+            @RequestParam(required = false) ModeloMoto modelo,
+            @RequestParam(required = false) Status status,
+            Model model) {
+        var motos = motoService.listarMotos(placa, chassi, modelo, status);
 
         model.addAttribute("motos", motos);
         return "lista-motos";

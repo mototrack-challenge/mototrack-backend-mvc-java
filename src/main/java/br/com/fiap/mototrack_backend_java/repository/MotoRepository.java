@@ -1,14 +1,29 @@
 package br.com.fiap.mototrack_backend_java.repository;
 
 import br.com.fiap.mototrack_backend_java.model.Moto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
+import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface MotoRepository extends JpaRepository<Moto, Long> {
-    List<Moto> findAllByOrderByIdAsc();
+    @Query("""
+    SELECT m FROM Moto m
+    WHERE (:placa IS NULL OR LOWER(m.placa) LIKE LOWER(CONCAT('%', :placa, '%')))
+      AND (:chassi IS NULL OR LOWER(m.chassi) LIKE LOWER(CONCAT('%', :chassi, '%')))
+      AND (:modelo IS NULL OR m.modelo = :modelo)
+      AND (:status IS NULL OR m.status = :status)
+    ORDER BY m.id ASC
+    """)
+    List<Moto> findByFiltros(
+            @Param("placa") String placa,
+            @Param("chassi") String chassi,
+            @Param("modelo") ModeloMoto modelo,
+            @Param("status") Status status
+    );
 }

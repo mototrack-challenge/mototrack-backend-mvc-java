@@ -56,56 +56,50 @@
           <h3>Filtros de Busca</h3>
         </div>
 
-        <div class="filtros_inputs">
-          <div class="input-group">
-            <label for="placa">Placa</label>
-            <input type="text" id="placa" placeholder="Ex: ABC1234" />
+        <form th:action="@{/motos}" method="get" >
+          <div class="filtros_inputs">
+              <div class="input-group">
+                <label for="placa">Placa</label>
+                <input type="text" id="placa" name="placa"
+                       placeholder="Ex: ABC1234" th:value="${param.placa}"/>
+              </div>
+
+              <div class="input-group">
+                <label for="chassi">Chassi</label>
+                <input type="text" id="chassi" name="chassi"
+                       placeholder="Número do chassi" th:value="${param.chassi}"/>
+              </div>
+
+              <div class="input-group">
+                <label for="modelo">Modelo</label>
+                <select id="modelo" name="modelo" th:value="${param.modelo}">
+                  <option value="">Selecione um modelo</option>
+                  <option value="MOTTU_E">Mottu-E</option>
+                  <option value="MOTTU_POP">Mottu-Pop</option>
+                  <option value="MOTTU_SPORT">Mottu-Sport</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" th:value="${param.status}">
+                  <option value="">Selecione um status</option>
+                  <option value="PRONTA_PARA_USO">Disponível</option>
+                  <option value="AVALIACAO">Em avaliação</option>
+                  <option value="MANUTENCAO">Em manutenção</option>
+                </select>
+              </div>
           </div>
 
-          <div class="input-group">
-            <label for="chassi">Chassi</label>
-            <input type="text" id="chassi" placeholder="Número do chassi" />
+          <div class="filtros_botoes">
+            <button class="botao_filtar" type="submit">
+              <i class="fas fa-filter"></i> Aplicar filtros
+            </button>
+            <a th:href="@{/motos}" class="botao_limpar_filtro">
+              <i class="fas fa-broom"></i> Limpar filtros
+            </a>
           </div>
-
-          <div class="input-group">
-            <label for="modelo">Modelo</label>
-            <select id="modelo">
-              <option value="">Selecione um modelo</option>
-              <option value="mottu-e">Mottu-E</option>
-              <option value="honda-150">Honda CG 150</option>
-              <option value="yamaha-250">Yamaha Factor 250</option>
-            </select>
-          </div>
-
-          <div class="input-group">
-            <label for="departamento">Departamento</label>
-            <select id="departamento">
-              <option value="">Selecione um departamento</option>
-              <option value="transporte">Transporte</option>
-              <option value="vendas">Vendas</option>
-              <option value="administrativo">Administrativo</option>
-            </select>
-          </div>
-
-          <div class="input-group">
-            <label for="status">Status</label>
-            <select id="status">
-              <option value="">Selecione um status</option>
-              <option value="disponivel">Disponível</option>
-              <option value="analise">Em análise</option>
-              <option value="manutencao">Em manutenção</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="filtros_botoes">
-          <button class="botao_filtar">
-            <i class="fas fa-filter"></i> Aplicar filtros
-          </button>
-          <button class="botao_limpar_filtro">
-            <i class="fas fa-broom"></i> Limpar filtros
-          </button>
-        </div>
+        </form>
       </section>
 
       <section class="secao_lista_motos">
