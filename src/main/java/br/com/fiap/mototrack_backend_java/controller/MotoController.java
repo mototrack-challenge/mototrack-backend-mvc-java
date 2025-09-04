@@ -34,8 +34,11 @@ public class MotoController {
             @RequestParam(required = false) Status status,
             Model model) {
         var motos = motoService.listarMotos(placa, chassi, modelo, status);
+        var resumo = motoService.resumirCards();
 
         model.addAttribute("motos", motos);
+        model.addAttribute("resumo", resumo);
+
         return "lista-motos";
     }
 

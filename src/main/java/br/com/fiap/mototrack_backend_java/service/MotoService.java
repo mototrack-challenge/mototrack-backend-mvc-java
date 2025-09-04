@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -46,6 +48,16 @@ public class MotoService {
         });
 
         return motos;
+    }
+
+    @Transactional(readOnly = true)
+    public Map<String, Long> resumirCards() {
+        Map<String, Long> resumo = new HashMap<>();
+        resumo.put("cadastradas", motoRepository.count());
+        resumo.put("avaliacao", motoRepository.countByDepartamentoAtual(TipoDepartamento.AVALIACAO));
+        resumo.put("manutencao", motoRepository.countByDepartamentoAtual(TipoDepartamento.MANUTENCAO));
+        resumo.put("prontasParaUso", motoRepository.countByDepartamentoAtual(TipoDepartamento.PRONTA_PARA_USO));
+        return resumo;
     }
 
     @Transactional(readOnly = true)

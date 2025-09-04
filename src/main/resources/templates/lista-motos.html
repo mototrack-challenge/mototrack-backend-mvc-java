@@ -27,25 +27,25 @@
       <section class="resumo_cards">
         <div class="card card_cadastradas">
           <i class="fas fa-motorcycle"></i>
-          <h2>12</h2>
+          <h2 th:text="${resumo.cadastradas}">0</h2>
           <p>Cadastradas</p>
         </div>
 
         <div class="card card_analise">
           <i class="fas fa-search"></i>
-          <h2>5</h2>
-          <p>Em Análise</p>
+          <h2 th:text="${resumo.avaliacao}">0</h2>
+          <p>Avaliação</p>
         </div>
 
         <div class="card card_manutencao">
           <i class="fas fa-tools"></i>
-          <h2>3</h2>
-          <p>Em Manutenção</p>
+          <h2 th:text="${resumo.manutencao}">0</h2>
+          <p>Manutenção</p>
         </div>
 
         <div class="card card_prontas">
           <i class="fas fa-check-circle"></i>
-          <h2>10</h2>
+          <h2 th:text="${resumo.prontasParaUso}">0</h2>
           <p>Prontas para Uso</p>
         </div>
       </section>
