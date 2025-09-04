@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.hateoas.RepresentationModel;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonPropertyOrder({"id_alerta", "gravidade", "mensagem", "moto_id", "data_alerta", "_links"})
-public class AlertaResponseDTO extends RepresentationModel<AlertaResponseDTO>  {
+public class AlertaResponseDTO  {
 
     @JsonProperty("id_alerta")
     private Long id;

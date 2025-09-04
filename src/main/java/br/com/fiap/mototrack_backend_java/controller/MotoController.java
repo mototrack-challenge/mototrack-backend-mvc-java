@@ -2,19 +2,21 @@ package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
 import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
+import br.com.fiap.mototrack_backend_java.model.Alerta;
+import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.service.MotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@RestController
+import java.util.Comparator;
+import java.util.List;
+
+@Controller
 @RequestMapping("/motos")
 public class MotoController {
 
@@ -22,18 +24,35 @@ public class MotoController {
     private MotoService motoService;
 
     @GetMapping
-    public ResponseEntity<Page<MotoResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        var motos = motoService.listarTodos(paginacao);
-        motos.forEach(this::adicionarLinks);
+    public String listarTodos(Model model) {
+        var motos = motoService.listarTodos();
 
-        return ResponseEntity.ok(motos);
+        // Para cada moto, já ordenamos e limitamos as movimentações para as últimas 5
+        motos.forEach(moto -> {
+            List<Movimentacao> ultimasMovimentacoes = moto.getMovimentacoes()
+                    .stream()
+                    .sorted(Comparator.comparing(Movimentacao::getDataMovimentacao).reversed())
+                    .limit(5)
+                    .toList();
+            moto.setMovimentacoes(ultimasMovimentacoes); // substitui a lista original
+        });
+
+        motos.forEach(moto -> {
+            List<Alerta> ultimosAlertas = moto.getAlertas()
+                    .stream()
+                    .sorted(Comparator.comparing(Alerta::getDataAlerta).reversed())
+                    .limit(5)
+                    .toList();
+            moto.setAlertas(ultimosAlertas); // substitui a lista original
+        });
+
+        model.addAttribute("motos", motos);
+        return "lista-motos";
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MotoResponseDTO> buscarPorId(@PathVariable Long id) {
         var moto = motoService.buscarPorId(id);
-        adicionarLinks(moto);
 
         return ResponseEntity.ok(moto);
     }
@@ -41,7 +60,6 @@ public class MotoController {
     @PostMapping
     public ResponseEntity<MotoResponseDTO> salvar(@RequestBody @Valid MotoRequestDTO motoRequestDTO, UriComponentsBuilder uriBuilder) {
         var moto = motoService.salvar(motoRequestDTO);
-        adicionarLinks(moto);
 
         var uri = uriBuilder.path("/motos/{id}").buildAndExpand(moto.getId()).toUri();
         return ResponseEntity.created(uri).body(moto);
@@ -50,7 +68,6 @@ public class MotoController {
     @PutMapping("/{id}")
     public ResponseEntity<MotoResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid MotoRequestDTO motoRequestDTO) {
         var motoAtualizada = motoService.atualizar(id, motoRequestDTO);
-        adicionarLinks(motoAtualizada);
 
         return ResponseEntity.ok(motoAtualizada);
     }
@@ -61,12 +78,5 @@ public class MotoController {
         return ResponseEntity.noContent().build();
     }
 
-    private MotoResponseDTO adicionarLinks(MotoResponseDTO moto) {
-        moto.add(linkTo(methodOn(MotoController.class).buscarPorId(moto.getId())).withRel("self"));
-        moto.add(linkTo(methodOn(MotoController.class).atualizar(moto.getId(), null)).withRel("update"));
-        moto.add(linkTo(methodOn(MotoController.class).deletar(moto.getId())).withRel("delete"));
-
-        return moto;
-    }
 
 }

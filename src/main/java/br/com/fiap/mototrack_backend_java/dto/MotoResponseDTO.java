@@ -7,7 +7,6 @@ import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
-import org.springframework.hateoas.RepresentationModel;
 import java.util.List;
 
 @Getter
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonPropertyOrder({"id_moto", "placa", "chassi", "modelo", "status", "movimentacoes", "alertas", "_links"})
-public class MotoResponseDTO extends RepresentationModel<MotoResponseDTO> {
+public class MotoResponseDTO {
 
     @JsonProperty("id_moto")
     private Long id;

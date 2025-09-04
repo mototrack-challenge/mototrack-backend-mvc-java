@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class MotoService {
@@ -20,9 +22,8 @@ public class MotoService {
     private MotoRepository motoRepository;
 
     @Transactional(readOnly = true)
-    public Page<MotoResponseDTO> listarTodos(Pageable pageable) {
-        return motoRepository.findAllByOrderByIdAsc(pageable)
-                .map(MotoMapper::toResponseDTO);
+    public List<Moto> listarTodos() {
+        return motoRepository.findAllByOrderByIdAsc();
     }
 
     @Transactional(readOnly = true)

@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --primary: #546e7a;
+  --primary-dark: #455a64;
+  --secondary: #546e7a;
+  --success: #0e9f6e;
+  --warning: #f05252;
+  --info: #3f83f8;
+  --light-bg: #f9fafb;
+  --dark-text: #1f2937;
+  --light-text: #6b7280;
+  --border: #e5e7eb;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --font: "Montserrat", sans-serif;
+  --alerta-alta: #f05252;
+  --alerta-media: #faca15;
+  --alerta-baixa: #3f83f8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  font-family: var(--font);
+  line-height: 1.6;
+}
+
+.cabecalho {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.rodape {
+  background-color: white;
+  padding: 28px 24px;
+  border-top: 1px solid #e0e0e0;
+  color: #7c8894;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+.logo h1 {
+  color: #395b65;
+  font-size: 24px;
+}
+
+.logo_botao button {
+  border: 1px solid #546e7a;
+  cursor: pointer;
+  background: transparent;
+  font-size: 15px;
+  padding: 10px 30px;
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease;
+}
+
+.logo_botao button:hover {
+  background-color: #546e7a;
+  color: #ffffff;
+}

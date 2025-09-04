@@ -7,14 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.hateoas.RepresentationModel;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonPropertyOrder({"id_departamento", "tipo_departamento", "descricao", "_links"})
-public class DepartamentoResponseDTO extends RepresentationModel<DepartamentoResponseDTO> {
+public class DepartamentoResponseDTO {
 
     @JsonProperty("id_departamento")
     private Long id;

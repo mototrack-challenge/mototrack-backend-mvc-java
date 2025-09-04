@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/alertas")
@@ -25,7 +23,6 @@ public class AlertaController {
     public ResponseEntity<Page<AlertaResponseDTO>> listarTodos(
             @PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
         var alertas = alertaService.listarTodos(paginacao);
-        alertas.forEach(this::adicionarLinks);
 
         return ResponseEntity.ok(alertas);
     }
@@ -33,7 +30,6 @@ public class AlertaController {
     @GetMapping("/{id}")
     public ResponseEntity<AlertaResponseDTO> buscarPorId(@PathVariable Long id) {
         var alerta = alertaService.buscarPorId(id);
-        adicionarLinks(alerta);
 
         return ResponseEntity.ok(alerta);
     }
@@ -47,7 +43,6 @@ public class AlertaController {
     @PostMapping
     public ResponseEntity<AlertaResponseDTO> salvar(@RequestBody @Valid AlertaRequestDTO alertaRequestDTO, UriComponentsBuilder uriBuilder) {
         var alerta = alertaService.salvar(alertaRequestDTO);
-        adicionarLinks(alerta);
 
         var uri = uriBuilder.path("/alertas/{id}").buildAndExpand(alerta.getId()).toUri();
         return ResponseEntity.created(uri).body(alerta);
@@ -56,7 +51,6 @@ public class AlertaController {
     @PutMapping("/{id}")
     public ResponseEntity<AlertaResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AlertaRequestDTO alertaRequestDTO) {
         var alertaAtualizado = alertaService.atualizar(id, alertaRequestDTO);
-        adicionarLinks(alertaAtualizado);
 
         return ResponseEntity.ok(alertaAtualizado);
     }
@@ -65,13 +59,5 @@ public class AlertaController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         alertaService.deletar(id);
         return ResponseEntity.noContent().build();
-    }
-
-    private AlertaResponseDTO adicionarLinks(AlertaResponseDTO alerta) {
-        alerta.add(linkTo(methodOn(AlertaController.class).buscarPorId(alerta.getId())).withRel("self"));
-        alerta.add(linkTo(methodOn(AlertaController.class).atualizar(alerta.getId(), null)).withRel("update"));
-        alerta.add(linkTo(methodOn(AlertaController.class).deletar(alerta.getId())).withRel("delete"));
-
-        return alerta;
     }
 }
