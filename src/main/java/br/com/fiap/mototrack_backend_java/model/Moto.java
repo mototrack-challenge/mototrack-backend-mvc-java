@@ -43,5 +43,4 @@ public class Moto {
     @OneToMany(mappedBy = "moto", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     @OrderBy("dataAlerta ASC")
     private List<Alerta> alertas;
-
 }

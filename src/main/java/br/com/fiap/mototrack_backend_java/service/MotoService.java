@@ -61,15 +61,14 @@ public class MotoService {
     }
 
     @Transactional(readOnly = true)
-    public MotoResponseDTO buscarPorId(Long id) {
+    public Moto buscarPorId(Long id) {
         var moto = buscarEntidadeMotoPorId(id);
-        return MotoMapper.toResponseDTO(moto);
+        return moto;
     }
 
     @Transactional
-    public MotoResponseDTO salvar(MotoRequestDTO motoRequestDTO) {
-        var moto = motoRepository.save(MotoMapper.toEntity(motoRequestDTO));
-        return MotoMapper.toResponseDTO(moto);
+    public Moto salvar(Moto moto) {
+        return motoRepository.save(moto);
     }
 
     @Transactional

@@ -3,6 +3,7 @@ package br.com.fiap.mototrack_backend_java.controller;
 import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
 import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
+import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
 import br.com.fiap.mototrack_backend_java.model.enums.Status;
@@ -51,19 +52,16 @@ public class MotoController {
         return "lista-motos";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MotoResponseDTO> buscarPorId(@PathVariable Long id) {
-        var moto = motoService.buscarPorId(id);
-
-        return ResponseEntity.ok(moto);
+    @GetMapping("/cadastrar")
+    public String cadastrarMotoForm(Model model) {
+        model.addAttribute("moto", new Moto());
+        return "cadastro-moto";
     }
 
     @PostMapping
-    public ResponseEntity<MotoResponseDTO> salvar(@RequestBody @Valid MotoRequestDTO motoRequestDTO, UriComponentsBuilder uriBuilder) {
-        var moto = motoService.salvar(motoRequestDTO);
-
-        var uri = uriBuilder.path("/motos/{id}").buildAndExpand(moto.getId()).toUri();
-        return ResponseEntity.created(uri).body(moto);
+    public String salvar(Moto moto) {
+        motoService.salvar(moto);
+        return "redirect:/motos";
     }
 
     @PutMapping("/{id}")

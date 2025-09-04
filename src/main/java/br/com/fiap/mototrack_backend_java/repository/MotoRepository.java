@@ -42,4 +42,8 @@ public interface MotoRepository extends JpaRepository<Moto, Long> {
     long countByDepartamentoAtual(@Param("tipo") TipoDepartamento tipo);
 
     long count();
+
+    boolean existsByPlaca(String placa);
+
+    boolean existsByChassi(String chassi);
 }
