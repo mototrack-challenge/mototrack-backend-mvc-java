@@ -33,8 +33,17 @@ public class MotoController {
             @RequestParam(required = false) ModeloMoto modelo,
             @RequestParam(required = false) Status status,
             Model model) {
+
         var motos = motoService.listarMotos(placa, chassi, modelo, status);
         var resumo = motoService.resumirCards();
+
+        if (motos.isEmpty()) {
+            if (modelo == null && status == null && (placa == null || placa.isBlank()) && (chassi == null || chassi.isBlank())) {
+                model.addAttribute("mensagemVazio", true);
+            } else {
+                model.addAttribute("mensagemFiltro", true);
+            }
+        }
 
         model.addAttribute("motos", motos);
         model.addAttribute("resumo", resumo);
@@ -64,10 +73,10 @@ public class MotoController {
         return ResponseEntity.ok(motoAtualizada);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    @GetMapping("/deletar/{id}")
+    public String deletar(@PathVariable Long id) {
         motoService.deletar(id);
-        return ResponseEntity.noContent().build();
+        return "redirect:/motos";
     }
 
 

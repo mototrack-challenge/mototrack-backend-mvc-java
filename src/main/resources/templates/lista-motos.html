@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
     <link rel="stylesheet" th:href="@{/css/lista-motos.css}" />
+    <script th:src="@{/js/modal-lista-motos.js}" defer></script>
   </head>
   <body>
     <header class="cabecalho">
@@ -110,6 +111,14 @@
           >
         </div>
 
+        <p class="mensagem-vazia" th:if="${mensagemVazio}">
+          Nenhuma moto cadastrada ainda.
+        </p>
+
+        <p class="mensagem-vazia" th:if="${mensagemFiltro}">
+          Nenhuma moto encontrada com os filtros informados.
+        </p>
+
         <div class="lista_motos">
 
           <div class="moto_card" th:each="moto : ${motos}">
@@ -174,9 +183,9 @@
               <a href="alertas.html" class="btn_card_moto btn_alertas">
                 <i class="fas fa-bell"></i> Alertas
               </a>
-              <a href="#" class="btn_card_moto btn_deletar_moto">
+              <button class="btn_card_moto btn_deletar_moto" th:onclick="'abrirModal(' + ${moto.id} + ')'">
                 <i class="fas fa-trash"></i> Deletar
-              </a>
+              </button>
             </div>
           </div>
 
@@ -187,5 +196,17 @@
     <footer class="rodape">
       <p>&copy; 2025 — MotoTrack</p>
     </footer>
+
+    <!-- Modal -->
+    <div id="modalExcluir" class="modal">
+      <div class="modal-conteudo">
+        <h3>Confirmação</h3>
+        <p>Tem certeza que deseja excluir esta moto?</p>
+        <div class="modal-botoes">
+          <button id="confirmarExcluir" class="btn btn_excluir">Sim, excluir</button>
+          <button onclick="fecharModal()" class="btn btn_cancelar">Cancelar</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

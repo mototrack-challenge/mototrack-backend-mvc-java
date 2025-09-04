@@ -94,6 +94,6 @@ public class MotoService {
 
     public Moto buscarEntidadeMotoPorId(Long id) {
         return motoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Moto com id: " + id + " não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Moto com id: " + id + " não encontrada"));
     }
 }
