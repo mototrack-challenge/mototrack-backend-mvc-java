@@ -43,7 +43,7 @@ public interface MotoRepository extends JpaRepository<Moto, Long> {
 
     long count();
 
-    boolean existsByPlaca(String placa);
+    boolean existsByPlacaIgnoreCase(String placa);
 
-    boolean existsByChassi(String chassi);
+    boolean existsByChassiIgnoreCase(String chassi);
 }

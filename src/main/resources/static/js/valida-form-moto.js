@@ -150,8 +150,15 @@ campoStatus.addEventListener("change", function () {
 
 // Submit do formulário
 formulario.addEventListener("submit", function (e) {
+  // Antes de validar e enviar, esconder a mensagem de erro de backend
+  const mensagensExistencia = document.querySelectorAll(".mensagem-erro-placa-chassi-existe");
+  mensagensExistencia.forEach((msg) => {
+    msg.style.display = "none";
+  });
+
+  // Validar formulário no frontend
   if (!validarFormulario()) {
-    e.preventDefault();
+    e.preventDefault(); // impede envio se houver erro no JS
   }
 });
 

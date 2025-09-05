@@ -68,7 +68,22 @@ public class MotoService {
 
     @Transactional
     public Moto salvar(Moto moto) {
+        if (moto.getPlaca() != null) {
+            moto.setPlaca(moto.getPlaca().toUpperCase());
+        }
+        if (moto.getChassi() != null) {
+            moto.setChassi(moto.getChassi().toUpperCase());
+        }
+
         return motoRepository.save(moto);
+    }
+
+    public boolean existePorPlaca(String placa) {
+        return motoRepository.existsByPlacaIgnoreCase(placa);
+    }
+
+    public boolean existePorChassi(String chassi) {
+        return motoRepository.existsByChassiIgnoreCase(chassi);
     }
 
     @Transactional

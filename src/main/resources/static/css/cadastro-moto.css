@@ -2,7 +2,7 @@
 .container_main {
   max-width: 1400px;
   margin: 2rem auto;
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
 /* Cabeçalho da página */
@@ -155,6 +155,12 @@
   font-size: 14px;
   margin-top: 5px;
   display: none;
+}
+
+.mensagem-erro-placa-chassi-existe {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .mensagem-erro.visivel {

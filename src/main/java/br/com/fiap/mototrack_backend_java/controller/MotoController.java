@@ -58,8 +58,27 @@ public class MotoController {
         return "cadastro-moto";
     }
 
-    @PostMapping
-    public String salvar(Moto moto) {
+    @PostMapping("/cadastrar")
+    public String cadastrarMoto(@ModelAttribute Moto moto, Model model) {
+        boolean temErro = false;
+        model.addAttribute("erroPlaca", null);
+        model.addAttribute("erroChassi", null);
+
+        if (motoService.existePorPlaca(moto.getPlaca())) {
+            model.addAttribute("erroPlaca", "Já existe uma moto cadastrada com essa placa.");
+            temErro = true;
+        }
+
+        if (motoService.existePorChassi(moto.getChassi())) {
+            model.addAttribute("erroChassi", "Já existe uma moto cadastrada com esse chassi.");
+            temErro = true;
+        }
+
+        if (temErro) {
+            model.addAttribute("moto", moto);
+            return "cadastro-moto";
+        }
+
         motoService.salvar(moto);
         return "redirect:/motos";
     }
