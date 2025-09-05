@@ -87,17 +87,17 @@ public class MotoService {
     }
 
     @Transactional
-    public MotoResponseDTO atualizar(Long id, MotoRequestDTO motoRequestDTO) {
+    public Moto atualizar(Long id, Moto motoNova) {
         var motoAtual = buscarEntidadeMotoPorId(id);
 
         motoAtual.setId(id);
-        motoAtual.setPlaca(motoRequestDTO.getPlaca());
-        motoAtual.setChassi(motoRequestDTO.getChassi());
-        motoAtual.setModelo(motoRequestDTO.getModelo());
-        motoAtual.setStatus(motoRequestDTO.getStatus());
+        motoAtual.setPlaca(motoNova.getPlaca().toUpperCase());
+        motoAtual.setChassi(motoNova.getChassi().toUpperCase());
+        motoAtual.setModelo(motoNova.getModelo());
+        motoAtual.setStatus(motoNova.getStatus());
 
-        var motoAtualizada = motoRepository.save(motoAtual);
-        return MotoMapper.toResponseDTO(motoAtualizada);
+
+        return motoRepository.save(motoAtual);
     }
 
     @Transactional

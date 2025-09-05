@@ -83,11 +83,40 @@ public class MotoController {
         return "redirect:/motos";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MotoResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid MotoRequestDTO motoRequestDTO) {
-        var motoAtualizada = motoService.atualizar(id, motoRequestDTO);
+    @GetMapping("/editar/{id}")
+    public String editarMotoForm(@PathVariable Long id, Model model) {
+        Moto moto = motoService.buscarEntidadeMotoPorId(id);
+        model.addAttribute("moto", moto);
+        return "editar-moto";
+    }
 
-        return ResponseEntity.ok(motoAtualizada);
+    @PostMapping("/editar/{id}")
+    public String editarMoto(@PathVariable Long id, @ModelAttribute Moto moto, Model model) {
+        boolean temErro = false;
+        model.addAttribute("erroPlaca", null);
+        model.addAttribute("erroChassi", null);
+
+        Moto motoOriginal = motoService.buscarEntidadeMotoPorId(id);
+
+        if (!moto.getPlaca().equalsIgnoreCase(motoOriginal.getPlaca())
+                && motoService.existePorPlaca(moto.getPlaca())) {
+            model.addAttribute("erroPlaca", "Já existe uma moto cadastrada com essa placa.");
+            temErro = true;
+        }
+
+        if (!moto.getChassi().equalsIgnoreCase(motoOriginal.getChassi())
+                && motoService.existePorChassi(moto.getChassi())) {
+            model.addAttribute("erroChassi", "Já existe uma moto cadastrada com esse chassi.");
+            temErro = true;
+        }
+
+        if (temErro) {
+            model.addAttribute("moto", moto);
+            return "editar-moto";
+        }
+
+        motoService.atualizar(id, moto);
+        return "redirect:/motos";
     }
 
     @GetMapping("/deletar/{id}")
@@ -95,6 +124,5 @@ public class MotoController {
         motoService.deletar(id);
         return "redirect:/motos";
     }
-
 
 }

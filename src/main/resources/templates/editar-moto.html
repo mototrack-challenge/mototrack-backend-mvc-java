@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack - Cadastrar Moto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+    <link rel="stylesheet" th:href="@{/css/cadastro-moto.css}" />
+    <script th:src="@{/js/valida-form-moto.js}" defer></script>
+</head>
+<body>
+<header class="cabecalho">
+    <div class="logo">
+        <img th:src="@{/img/logo-azul.png}" alt="logo MotoTrack">
+        <h1>MotoTrack</h1>
+    </div>
+
+    <div class="logo_botao">
+        <button>Logout</button>
+    </div>
+</header>
+
+<main class="container_main">
+    <div class="pagina_cabecalho">
+        <h2><i class="fas fa-motorcycle"></i> Editar Moto</h2>
+        <a href="/motos" class="btn_voltar"><i class="fas fa-arrow-left"></i> Voltar para Lista</a>
+    </div>
+
+    <div id="mensagensErro" class="mensagens-erro-container"></div>
+
+    <form id="form_moto" th:action="@{'/motos/editar/' + ${moto.id}}" th:object="${moto}" method="post" class="formulario_cadastro">
+        <div class="formulario_grid">
+            <div class="form_grupo">
+                <label for="modelo">Modelo <span class="obrigatorio">*</span></label>
+                <select id="modelo" th:field="*{modelo}" required>
+                    <option value="" disabled>Selecione um modelo</option>
+                    <option th:value="MOTTU_E">Mottu-E</option>
+                    <option th:value="MOTTU_POP">Mottu-Pop</option>
+                    <option th:value="MOTTU_SPORT">Mottu-Sport</option>
+                </select>
+                <div id="erroModelo" class="mensagem-erro">Por favor, selecione um modelo</div>
+            </div>
+
+            <div class="form_grupo">
+                <label for="placa">Placa <span class="obrigatorio">*</span></label>
+                <input type="text" id="placa" th:field="*{placa}" placeholder="Ex: ABC1234" required maxlength="7">
+                <div id="erroPlaca" class="mensagem-erro">Por favor, insira uma placa válida (7 caracteres)</div>
+            </div>
+
+            <div class="form_grupo">
+                <label for="chassi">Chassi <span class="obrigatorio">*</span></label>
+                <input type="text" id="chassi" th:field="*{chassi}" placeholder="Número do chassi" required maxlength="17">
+                <div id="erroChassi" class="mensagem-erro">Por favor, insira um número de chassi válido (17 caracteres)</div>
+            </div>
+
+            <div class="form_grupo">
+                <label for="status">Status <span class="obrigatorio">*</span></label>
+                <select id="status" th:field="*{status}" required>
+                    <option value="" disabled>Selecione um status</option>
+                    <option th:value="PRONTA_PARA_USO">Disponível</option>
+                    <option th:value="AVALIACAO">Em avaliação</option>
+                    <option th:value="MANUTENCAO">Em manutenção</option>
+                </select>
+                <div id="erroStatus" class="mensagem-erro">Por favor, selecione um status</div>
+            </div>
+
+            <div class="mensagem-erro-placa-chassi-existe" th:if="${erroPlaca != null}" th:text="${erroPlaca}"></div>
+            <div class="mensagem-erro-placa-chassi-existe" th:if="${erroChassi != null}" th:text="${erroChassi}"></div>
+
+            <div class="form_botoes">
+                <button type="button" class="btn_cancelar">Cancelar</button>
+                <button type="submit" class="btn_cadastrar"><i class="fas fa-save"></i> Editar Moto</button>
+            </div>
+
+        </div>
+    </form>
+</main>
+
+<footer class="rodape">
+    <p>&copy; 2025 — MotoTrack. Todos os direitos reservados.</p>
+</footer>
+</body>
+</html>
