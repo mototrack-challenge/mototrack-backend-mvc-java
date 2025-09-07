@@ -37,7 +37,7 @@ public class AlertaService {
 
     @Transactional(readOnly = true)
     public List<AlertaResponseDTO> buscarAlertasPorIdDaMoto(Long id) {
-        var moto = motoService.buscarEntidadeMotoPorId(id);
+        var moto = motoService.buscarPorId(id);
         var alertas = alertaRepository.findByMotoIdOrderByDataAlertaAsc(moto.getId());
         return alertas.stream()
                 .map(AlertaMapper::toResponseDTO)
@@ -46,7 +46,7 @@ public class AlertaService {
 
     @Transactional
     public AlertaResponseDTO salvar(AlertaRequestDTO alertaRequestDTO) {
-        var moto = motoService.buscarEntidadeMotoPorId(alertaRequestDTO.getIdMoto());
+        var moto = motoService.buscarPorId(alertaRequestDTO.getIdMoto());
         var alerta = alertaRepository.save(AlertaMapper.toEntity(alertaRequestDTO, moto));
         return AlertaMapper.toResponseDTO(alerta);
     }
@@ -54,7 +54,7 @@ public class AlertaService {
     @Transactional
     public AlertaResponseDTO atualizar(Long id, AlertaRequestDTO alertaRequestDTO) {
         var alertaAtual = buscarEntidadeAlertaPorId(id);
-        var moto = motoService.buscarEntidadeMotoPorId(alertaRequestDTO.getIdMoto());
+        var moto = motoService.buscarPorId(alertaRequestDTO.getIdMoto());
 
         alertaAtual.setId(id);
         alertaAtual.setGravidade(alertaRequestDTO.getGravidade());

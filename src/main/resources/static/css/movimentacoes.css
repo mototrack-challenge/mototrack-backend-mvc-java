@@ -1,0 +1,491 @@
+/* Container principal */
+.container_main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+}
+
+/* Cabeçalho da página */
+.pagina_cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pagina_titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagina_cabecalho h2 {
+  color: var(--dark-text);
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.pagina_cabecalho h2 i {
+  color: var(--primary);
+}
+
+.btn_voltar {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_voltar:hover {
+  background-color: #f3f4f6;
+}
+
+.btn_adicionar {
+    margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_adicionar:hover {
+  background: var(--primary-dark);
+}
+
+/* Informações da moto */
+.moto_info {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.moto_info img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.moto_detalhes {
+  flex: 1;
+}
+
+.moto_detalhes h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--dark-text);
+}
+
+.moto_detalhes p {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.moto_detalhes strong {
+  min-width: 150px;
+  color: var(--dark-text);
+}
+
+.moto_detalhes span {
+  color: var(--light-text);
+}
+
+/* Lista de movimentações */
+
+.container_lista_movimentacoes{
+  margin-top: 10px;
+}
+.movimentacoes_lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.sem_movimentacoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 150px;
+    font-size: 1.1em;
+    color: #555;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.movimentacao_card {
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.movimentacao_card:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-3px);
+}
+
+.movimentacao_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.movimentacao_titulo {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.movimentacao_data {
+  font-size: 14px;
+  color: var(--light-text);
+  background-color: var(--light-bg);
+  padding: 4px 10px;
+  border-radius: 16px;
+}
+
+.movimentacao_departamento {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--dark-text);
+}
+
+.movimentacao_departamento strong {
+  color: var(--primary);
+}
+
+.movimentacao_acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.btn_deletar {
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--warning);
+}
+
+.btn_deletar:hover {
+  background: #c81e1e;
+}
+
+/* Modal de cadastro */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal_header h3 {
+  color: var(--dark-text);
+  font-weight: 700;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fechar_modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--light-text);
+}
+
+.form_grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form_grupo label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.form_grupo input,
+.form_grupo select {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--dark-text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.form_grupo input:focus,
+.form_grupo select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(84, 110, 122, 0.15);
+}
+
+.modal_botoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn_cancelar {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: transparent;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+}
+
+.btn_cancelar:hover {
+  background-color: #f3f4f6;
+}
+
+.btn_salvar {
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: background 0.2s ease;
+}
+
+.btn_salvar:hover {
+  background: var(--primary-dark);
+}
+
+.modal_deletar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-conteudo {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 450px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-conteudo h3 {
+  color: var(--dark-text);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-conteudo h3::before {
+  content: "⚠️";
+  font-size: 24px;
+}
+
+.modal-conteudo p {
+  color: var(--light-text);
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.modal-botoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_excluir {
+  background: var(--warning);
+  color: white;
+  box-shadow: var(--card-shadow);
+}
+
+.btn_excluir:hover {
+  background: #c81e1e;
+}
+
+.btn_cancelar {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--dark-text);
+  box-shadow: var(--card-shadow);
+}
+
+.btn_cancelar:hover {
+  background-color: #f3f4f6;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .movimentacoes_lista {
+    grid-template-columns: 1fr;
+  }
+
+  .moto_info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .moto_detalhes p {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .moto_detalhes strong {
+    min-width: auto;
+    margin-bottom: 4px;
+  }
+
+  .pagina_cabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cabecalho {
+    padding: 1rem;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal_content {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .modal_botoes {
+    flex-direction: column;
+  }
+
+  .btn_voltar,
+  .btn_adicionar {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,24 +1,13 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
-import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
-import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.model.Moto;
-import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
 import br.com.fiap.mototrack_backend_java.model.enums.Status;
-import br.com.fiap.mototrack_backend_java.model.enums.TipoDepartamento;
 import br.com.fiap.mototrack_backend_java.service.MotoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Comparator;
-import java.util.List;
 
 @Controller
 @RequestMapping("/motos")
@@ -85,7 +74,7 @@ public class MotoController {
 
     @GetMapping("/editar/{id}")
     public String editarMotoForm(@PathVariable Long id, Model model) {
-        Moto moto = motoService.buscarEntidadeMotoPorId(id);
+        Moto moto = motoService.buscarPorId(id);
         model.addAttribute("moto", moto);
         return "editar-moto";
     }
@@ -96,7 +85,7 @@ public class MotoController {
         model.addAttribute("erroPlaca", null);
         model.addAttribute("erroChassi", null);
 
-        Moto motoOriginal = motoService.buscarEntidadeMotoPorId(id);
+        Moto motoOriginal = motoService.buscarPorId(id);
 
         if (!moto.getPlaca().equalsIgnoreCase(motoOriginal.getPlaca())
                 && motoService.existePorPlaca(moto.getPlaca())) {

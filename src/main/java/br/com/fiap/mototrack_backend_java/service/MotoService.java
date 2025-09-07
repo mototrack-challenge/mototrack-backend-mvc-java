@@ -1,8 +1,5 @@
 package br.com.fiap.mototrack_backend_java.service;
 
-import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
-import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
-import br.com.fiap.mototrack_backend_java.mapper.MotoMapper;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
@@ -10,10 +7,7 @@ import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
 import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import br.com.fiap.mototrack_backend_java.model.enums.TipoDepartamento;
 import br.com.fiap.mototrack_backend_java.repository.MotoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,8 +56,8 @@ public class MotoService {
 
     @Transactional(readOnly = true)
     public Moto buscarPorId(Long id) {
-        var moto = buscarEntidadeMotoPorId(id);
-        return moto;
+        return motoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Moto com id: " + id + " não encontrada"));
     }
 
     @Transactional
@@ -88,7 +82,7 @@ public class MotoService {
 
     @Transactional
     public Moto atualizar(Long id, Moto motoNova) {
-        var motoAtual = buscarEntidadeMotoPorId(id);
+        var motoAtual = buscarPorId(id);
 
         motoAtual.setId(id);
         motoAtual.setPlaca(motoNova.getPlaca().toUpperCase());
@@ -102,12 +96,7 @@ public class MotoService {
 
     @Transactional
     public void deletar(Long id) {
-        var moto = buscarEntidadeMotoPorId(id);
+        var moto = buscarPorId(id);
         motoRepository.delete(moto);
-    }
-
-    public Moto buscarEntidadeMotoPorId(Long id) {
-        return motoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Moto com id: " + id + " não encontrada"));
     }
 }

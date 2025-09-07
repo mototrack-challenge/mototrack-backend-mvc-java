@@ -25,6 +25,11 @@
     </header>
 
     <main class="container_main">
+      <section class="resumo_titulo">
+        <h2>Motos por Departamento</h2>
+        <p>Resumo do status das motos cadastradas</p>
+      </section>
+  
       <section class="resumo_cards">
         <div class="card card_cadastradas">
           <i class="fas fa-motorcycle"></i>
@@ -126,7 +131,7 @@
                 th:classappend="${moto.status.name() == 'AVALIACAO' ? 'status-em_analise' :
                        moto.status.name() == 'MANUTENCAO' ? 'status-em_manutencao' :
                        moto.status.name() == 'PRONTA_PARA_USO' ? 'status-disponivel' : ''}"
-                th:text="${moto.status.name() == 'AVALIACAO' ? 'Análise' :
+                th:text="${moto.status.name() == 'AVALIACAO' ? 'Avaliação' :
                 moto.status.name() == 'MANUTENCAO' ? 'Manutenção' :
                 moto.status.name() == 'PRONTA_PARA_USO' ? 'Disponível' : moto.status.name()}">
           </span>
@@ -177,7 +182,7 @@
               <a th:href="@{'/motos/editar/' + ${moto.id}}" class="btn_card_moto btn_editar_moto">
                 <i class="fas fa-edit"></i> Editar
               </a>
-              <a href="movimentacoes.html" class="btn_card_moto btn_movimentacoes">
+              <a th:href="@{'/movimentacoes/moto/' + ${moto.id}}" class="btn_card_moto btn_movimentacoes">
                 <i class="fas fa-exchange-alt"></i> Movimentações
               </a>
               <a href="alertas.html" class="btn_card_moto btn_alertas">
