@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoTrack - Cadastro</title>
     <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <script th:src="@{/js/valida-form-cadastro.js}" defer></script>
 </head>
 <body>
     <main>
@@ -40,7 +41,6 @@
                             required
                             th:field="*{email}"
                         />
-                        <div class="error_message" id="emailError">Por favor, insira um email válido</div>
                     </div>
 
                     <div class="form_group">
@@ -55,14 +55,19 @@
                                 th:field="*{senha}"
                             />
                         </div>
-                        <div class="error_message" id="passwordError">A senha deve ter pelo menos 6 caracteres</div>
                     </div>
 
                     <button type="submit" class="btn_primary">Cadastrar</button>
                 </form>
 
+                <div class="container_mensagem_login" id="validacaoMensagem"></div>
+
+                <div class="container_mensagem_login_sucesso" id="cadastroSucesso" th:if="${mensagemSucesso}">
+                    <p th:text="${mensagemSucesso}"></p>
+                </div>
+
                 <div class="container_mensagem_login" id="loginMessage">
-                    <p th:if="${param.cadastro}" th:text="'Cadastro realizado com sucesso. Faça login.'"></p>
+                    <p th:if="${mensagemErro}" th:text="${mensagemErro}"></p>
                 </div>
 
                 <div class="container_link_cadastro">

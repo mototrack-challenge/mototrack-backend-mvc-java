@@ -19,6 +19,9 @@ public class UsuarioService {
 
     @Transactional
     public Usuario salvar(UsuarioRequestDTO usuarioDTO) {
+        if (usuarioRepository.findByEmail(usuarioDTO.getEmail()).isPresent()) {
+            throw new RuntimeException("Este email já está cadastrado.");
+        }
         return usuarioRepository.save(usuarioDTO.toEntity(passwordEncoder));
     }
 }

@@ -157,6 +157,15 @@ body {
   color: var(--warning);
 }
 
+.container_mensagem_login_sucesso {
+  margin: 20px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--success);
+}
+
 .mensagem_login_erro {
   background-color: rgba(240, 82, 82, 0.1);
   color: var(--warning);
@@ -186,6 +195,10 @@ body {
 .link_cadastro a:hover {
   color: var(--primary-dark);
   text-decoration: underline;
+}
+
+#validacaoMensagem {
+  display: none;
 }
 
 @media (max-width: 650px) {

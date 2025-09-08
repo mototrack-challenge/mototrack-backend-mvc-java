@@ -26,7 +26,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/cadastrar")
-    public String cadastroPage(Model model) {
+    public String cadastroPagina(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioRequestDTO());
         return "cadastro";
     }
@@ -35,9 +35,10 @@ public class UsuarioController {
     public String cadastrarUsuario(@ModelAttribute("usuarioDTO") UsuarioRequestDTO usuarioDTO, Model model) {
         try {
             Usuario usuario = usuarioService.salvar(usuarioDTO);
-            return "redirect:/login?cadastro=true";
+            model.addAttribute("mensagemSucesso", "Cadastro realizado com sucesso! Você será redirecionado para o login.");
+            return "cadastro";
         } catch (Exception e) {
-            model.addAttribute("mensagemErro", "Erro ao cadastrar usuário: " + e.getMessage());
+            model.addAttribute("mensagemErro", e.getMessage());
             return "cadastro";
         }
     }
