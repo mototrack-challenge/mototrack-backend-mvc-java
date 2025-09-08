@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoTrack - Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 <body>
     <main>
         <div class="container_login">
-            <img src="../logo-azul.png" alt="Logo da MotoTrack" />
+            <img th:src="@{/img/logo-azul.png}" alt="Logo da MotoTrack" />
             
             <section class="container_login_form">
                 <div class="container_login_form_textos">
@@ -17,12 +17,13 @@
                     <p>Entre com sua conta para continuar</p>
                 </div>
 
-                <form class="login_form" id="loginForm">
+                <form class="login_form" id="loginForm" action="/login" method="post">
                     <div class="form_group">
                         <label for="email">Email</label>
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             placeholder="Digite seu email"
                             required
                         />
@@ -35,6 +36,7 @@
                             <input
                                 type="password"
                                 id="password"
+                                name="senha"
                                 placeholder="Digite sua senha"
                                 required
                             />
@@ -45,10 +47,12 @@
                     <button type="submit" class="btn_primary">Entrar</button>
                 </form>
 
-                <div class="container_mensagem_login" id="loginMessage"></div>
+                <div class="container_mensagem_login" id="loginMessage">
+                    <p th:if="${param.error}" th:text="'Email ou senha inválidos.'"></p>
+                </div>
 
                 <div class="container_link_cadastro">
-                    <p class="link_cadastro">Ainda não possui uma conta? <a href="#">Cadastre-se</a></p>
+                    <p class="link_cadastro">Ainda não possui uma conta? <a href="/cadastrar">Cadastre-se</a></p>
                 </div>
             </section>
         </div>

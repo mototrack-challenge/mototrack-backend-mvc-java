@@ -68,7 +68,7 @@ body {
   font-size: 24px;
 }
 
-.logo_botao button {
+.logo_botao a {
     border: 1px solid var(--border);
     cursor: pointer;
     background: white;
@@ -85,7 +85,7 @@ body {
     gap: 8px;
 }
 
-.logo_botao button:hover {
+.logo_botao a:hover {
   background-color: #f3f4f6;
 }
 

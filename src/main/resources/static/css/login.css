@@ -14,9 +14,6 @@
   --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
   --hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   --font: "Montserrat", sans-serif;
-  --alerta-alta: #f05252;
-  --alerta-media: #faca15;
-  --alerta-baixa: #3f83f8;
 }
 
 * {
@@ -157,7 +154,7 @@ body {
   border-radius: 8px;
   text-align: center;
   font-size: 14px;
-  display: none;
+  color: var(--warning);
 }
 
 .mensagem_login_erro {

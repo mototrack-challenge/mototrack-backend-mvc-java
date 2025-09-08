@@ -1,57 +1,44 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
-import br.com.fiap.mototrack_backend_java.dto.UsuarioResponseDTO;
+import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.service.UsuarioService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController
-@RequestMapping("/usuarios")
+@Controller
+@RequestMapping("")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping
-    public ResponseEntity<Page<UsuarioResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        var usuarios = usuarioService.listarTodos(paginacao);
+    @GetMapping("/login")
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                            Model model) {
+        if (error != null) {
+            model.addAttribute("mensagemErro", "Email ou senha inválidos.");
+        }
 
-        return ResponseEntity.ok(usuarios);
+        return "login";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
-        var usuario = usuarioService.buscarPorId(id);
-
-        return ResponseEntity.ok(usuario);
+    @GetMapping("/cadastrar")
+    public String cadastroPage(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioRequestDTO());
+        return "cadastro";
     }
 
-    @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> salvar(@RequestBody @Valid UsuarioRequestDTO usuarioDTO, UriComponentsBuilder uriBuilder) {
-        var usuario = usuarioService.salvar(usuarioDTO);
-
-        var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
-        return ResponseEntity.created(uri).body(usuario);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioRequestDTO usuarioDTO) {
-        var usuarioAtualizado = usuarioService.atualizar(id, usuarioDTO);
-
-        return ResponseEntity.ok(usuarioAtualizado);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        usuarioService.deletar(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/cadastrar")
+    public String cadastrarUsuario(@ModelAttribute("usuarioDTO") UsuarioRequestDTO usuarioDTO, Model model) {
+        try {
+            Usuario usuario = usuarioService.salvar(usuarioDTO);
+            return "redirect:/login?cadastro=true";
+        } catch (Exception e) {
+            model.addAttribute("mensagemErro", "Erro ao cadastrar usuário: " + e.getMessage());
+            return "cadastro";
+        }
     }
 }

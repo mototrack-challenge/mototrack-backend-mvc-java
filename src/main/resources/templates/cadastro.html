@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoTrack - Cadastro</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 <body>
     <main>
         <div class="container_login">
-            <img src="../logo-azul.png" alt="Logo da MotoTrack" />
+            <img th:src="@{/img/logo-azul.png}" alt="Logo da MotoTrack" />
             
             <section class="container_login_form">
                 <div class="container_login_form_textos">
@@ -17,14 +17,16 @@
                     <p>Preencha o formulário abaixo para criar sua conta.</p>
                 </div>
 
-                <form class="login_form" id="loginForm">
+                <form class="login_form" id="loginForm" action="/cadastrar" method="post" th:object="${usuarioDTO}">
                     <div class="form_group">
                         <label for="nome">Nome Completo</label>
                         <input
                             type="text"
                             id="nome"
+                            name="nome"
                             placeholder="Digite seu nome completo"
                             required
+                            th:field="*{nome}"
                         />
                     </div>
 
@@ -33,8 +35,10 @@
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             placeholder="Digite seu email"
                             required
+                            th:field="*{email}"
                         />
                         <div class="error_message" id="emailError">Por favor, insira um email válido</div>
                     </div>
@@ -45,8 +49,10 @@
                             <input
                                 type="password"
                                 id="password"
+                                name="senha"
                                 placeholder="Digite sua senha"
                                 required
+                                th:field="*{senha}"
                             />
                         </div>
                         <div class="error_message" id="passwordError">A senha deve ter pelo menos 6 caracteres</div>
@@ -55,10 +61,12 @@
                     <button type="submit" class="btn_primary">Cadastrar</button>
                 </form>
 
-                <div class="container_mensagem_login" id="loginMessage"></div>
+                <div class="container_mensagem_login" id="loginMessage">
+                    <p th:if="${param.cadastro}" th:text="'Cadastro realizado com sucesso. Faça login.'"></p>
+                </div>
 
                 <div class="container_link_cadastro">
-                    <p class="link_cadastro">Já possui uma conta? <a href="#">Faça login</a></p>
+                    <p class="link_cadastro">Já possui uma conta? <a href="/login">Faça login</a></p>
                 </div>
             </section>
         </div>
