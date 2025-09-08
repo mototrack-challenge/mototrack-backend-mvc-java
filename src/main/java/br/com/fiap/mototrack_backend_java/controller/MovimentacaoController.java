@@ -24,9 +24,9 @@ public class MovimentacaoController {
     private DepartamentoService departamentoService;
 
     @GetMapping("/moto/{id}")
-    public String listarPorMoto(@PathVariable Long id, Model model) {
-        var movimentacoes = movimentacaoService.buscarMovimentacoesPorIdDaMoto(id);
-        var moto = motoService.buscarPorId(id);
+    public String listarPorMoto(@PathVariable("id") Long idMoto, Model model) {
+        var movimentacoes = movimentacaoService.buscarMovimentacoesPorIdDaMoto(idMoto);
+        var moto = motoService.buscarPorId(idMoto);
 
         model.addAttribute("movimentacoes", movimentacoes);
         model.addAttribute("moto", moto);
@@ -37,8 +37,8 @@ public class MovimentacaoController {
 
     @PostMapping("/cadastrar")
     public String cadastrarMovimentacao(@ModelAttribute MovimentacaoRequestDTO movimentacao) {
-        Movimentacao movSalva = movimentacaoService.salvar(movimentacao);
-        Long motoId = movSalva.getMoto().getId();
+        Movimentacao movimentacaoSalva = movimentacaoService.salvar(movimentacao);
+        Long motoId = movimentacaoSalva.getMoto().getId();
 
         return "redirect:/movimentacoes/moto/" + motoId;
     }

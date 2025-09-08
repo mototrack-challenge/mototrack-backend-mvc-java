@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack - Alertas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+    <link rel="stylesheet" th:href="@{/css/alertas.css}" />
+    <script th:src="@{/js/modal-alerta.js}" defer></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="logo">
+            <img th:src="@{/img/logo-azul.png}" alt="logo MotoTrack">
+            <h1>MotoTrack</h1>
+        </div>
+
+        <div class="logo_botao">
+            <button>Logout</button>
+        </div>
+    </header>
+
+    <main class="container_main">
+        <div class="pagina_cabecalho">
+            <div class="pagina_titulo">
+                <h2><i class="fas fa-bell"></i> Alertas da Moto</h2>
+            </div>
+            <div class="pagina_acoes">
+                <a href="/motos" class="btn_voltar"><i class="fas fa-arrow-left"></i> Voltar para Lista</a>
+                <button class="btn_adicionar" id="btnNovoAlerta"><i class="fas fa-plus"></i> Novo Alerta</button>
+            </div>
+        </div>
+
+        <div class="moto_info">
+            <img th:src="${moto.modelo.name() == 'MOTTU_POP' ? '/img/mottu-pop.png' :
+                   moto.modelo.name() == 'MOTTU_SPORT' ? '/img/mottu-sport.png' :
+                   moto.modelo.name() == 'MOTTU_E' ? '/img/mottu-e.png' : '/img/mottu-e.png'}"
+                 th:alt="${moto.modelo.name()}"/>
+            <div class="moto_detalhes">
+                <h3 th:text="${moto.modelo.name() == 'MOTTU_POP' ? 'Mottu-Pop' :
+                        moto.modelo.name() == 'MOTTU_SPORT' ? 'Mottu-Sport' :
+                        moto.modelo.name() == 'MOTTU_E' ? 'Mottu-E' : 'Outro'}">
+                    Modelo
+                </h3>
+                <p><strong>Placa:</strong> <span th:text="${moto.placa}">Placa</span></p>
+                <p><strong>Chassi:</strong> <span th:text="${moto.chassi}">Chassi</span></p>
+                <p><strong>Status atual:</strong> <span th:text="${moto.status.name() == 'AVALIACAO' ? 'Avaliação' :
+                    moto.status.name() == 'MANUTENCAO' ? 'Manutenção' :
+                    moto.status.name() == 'PRONTA_PARA_USO' ? 'Disponível' : moto.status.name()}">
+                </span></p>
+            </div>
+        </div>
+
+        <div class="container_lista_alertas">
+
+            <div th:if="${#lists.isEmpty(alertas)}" class="sem_alertas">
+                <p><i class="fas fa-info-circle"></i> Nenhum alerta cadastrado para esta moto.</p>
+            </div>
+
+            <div class="alertas_lista">
+
+                <div class="alerta_card alerta-alta" th:each="alerta, stat : ${alertas}">
+                    <div class="alerta_header">
+                        <div class="alerta_titulo">Alerta #<span th:text="${stat.count}"></span></div>
+                        <div class="alerta_data" th:text="${#temporals.format(alerta.dataAlerta, 'dd/MM/yyyy HH:mm')}">data</div>
+                    </div>
+                    <div class="alerta_gravidade">
+                        <strong>Gravidade:</strong>
+                        <span class="gravidade-badge"
+                              th:classappend="${alerta.gravidade.name() == 'ALTA' ? ' gravidade-alta' :
+                                              alerta.gravidade.name() == 'MEDIA' ? ' gravidade-media' :
+                                              alerta.gravidade.name() == 'BAIXA' ? ' gravidade-baixa' : ''}"
+                              th:text="${alerta.gravidade.name() == 'ALTA' ? 'Alta' :
+                                        alerta.gravidade.name() == 'MEDIA' ? 'Média' :
+                                        alerta.gravidade.name() == 'BAIXA' ? 'Baixa' : 'Outro'}">
+                            Gravidade
+                        </span>
+                    </div>
+                    <div class="alerta_mensagem">
+                        <strong>Mensagem:</strong> <span th:text="${alerta.mensagem}"></span>
+                    </div>
+                    <div class="alerta_acoes">
+                        <button class="btn_deletar" th:onclick="'abrirModalExcluir(' + ${alerta.id} + ')'">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal para novo alerta -->
+    <div class="modal" id="modalCadastrarAlerta">
+        <div class="modal_content">
+            <div class="modal_header">
+                <h3><i class="fas fa-bell"></i> Novo Alerta</h3>
+                <button class="fechar_modal">&times;</button>
+            </div>
+            
+            <form id="formAlerta" th:action="@{/alertas/cadastrar}" method="post">
+                <input type="hidden" name="idMoto" th:value="${moto.id}" />
+                
+                <div class="form_grupo">
+                    <label for="gravidade">Gravidade <span class="obrigatorio">*</span></label>
+                    <select id="gravidade" name="gravidade" required>
+                        <option value="">Selecione a gravidade</option>
+                        <option th:value="ALTA">Alta</option>
+                        <option th:value="MEDIA">Média</option>
+                        <option th:value="BAIXA">Baixa</option>
+                    </select>
+                </div>
+
+                <div class="form_grupo">
+                    <label for="mensagem">Mensagem <span class="obrigatorio">*</span></label>
+                    <textarea id="mensagem" name="mensagem" rows="4" placeholder="Descreva o alerta" required></textarea>
+                </div>
+
+                <div class="modal_botoes">
+                    <button type="button" class="btn_cancelar" id="btnCancelar">Cancelar</button>
+                    <button type="submit" class="btn_salvar"><i class="fas fa-save"></i> Salvar Alerta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Deletar -->
+    <div id="modalExcluir" class="modal_deletar">
+        <div class="modal-conteudo">
+            <h3>Confirmação</h3>
+            <p>Tem certeza que deseja excluir este alerta?</p>
+            <div class="modal-botoes">
+                <button id="confirmarExcluir" class="btn btn_excluir">Sim, excluir</button>
+                <button onclick="fecharModalExcluir()" class="btn btn_cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <p>&copy; 2025 — MotoTrack. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
