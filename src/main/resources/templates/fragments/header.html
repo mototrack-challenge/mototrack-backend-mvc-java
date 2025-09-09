@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotoTrack - Lista de Motos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+</head>
+<body>
+    <header class="cabecalho" th:fragment="headerFragment">
+        <div class="logo">
+            <img th:src="@{/img/logo-azul.png}" alt="logo" />
+            <h1>MotoTrack</h1>
+        </div>
+
+        <div class="logo_botao">
+            <a href="/logout" class="btn_logout">Logout</a>
+        </div>
+    </header>
+</body>
+</html>

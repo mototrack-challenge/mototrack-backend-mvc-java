@@ -5,21 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoTrack - Alertas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
     <link rel="stylesheet" th:href="@{/css/alertas.css}" />
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
     <script th:src="@{/js/modal-alerta.js}" defer></script>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <img th:src="@{/img/logo-azul.png}" alt="logo MotoTrack">
-            <h1>MotoTrack</h1>
-        </div>
-
-        <div class="logo_botao">
-            <button>Logout</button>
-        </div>
-    </header>
+    <div th:replace="fragments/header :: headerFragment"></div>
 
     <main class="container_main">
         <div class="pagina_cabecalho">
@@ -138,9 +129,7 @@
         </div>
     </div>
 
-    <footer class="rodape">
-        <p>&copy; 2025 — MotoTrack. Todos os direitos reservados.</p>
-    </footer>
+    <div th:replace="fragments/footer :: footerFragment"></div>
 
 </body>
 </html>

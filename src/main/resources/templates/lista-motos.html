@@ -4,25 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoTrack - Lista de Motos</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/css/lista-motos.css}" />
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
     <script th:src="@{/js/modal-lista-motos.js}" defer></script>
   </head>
   <body>
-    <header class="cabecalho">
-      <div class="logo">
-        <img th:src="@{/img/logo-azul.png}" alt="logo" />
-        <h1>MotoTrack</h1>
-      </div>
-
-      <div class="logo_botao">
-        <a href="/logout" class="btn_logout">Logout</a>
-      </div>
-    </header>
+    <div th:replace="fragments/header :: headerFragment"></div>
 
     <main class="container_main">
       <section class="resumo_titulo">
@@ -198,9 +186,7 @@
       </section>
     </main>
 
-    <footer class="rodape">
-      <p>&copy; 2025 — MotoTrack</p>
-    </footer>
+    <div th:replace="fragments/footer :: footerFragment"></div>
 
     <!-- Modal -->
     <div id="modalExcluir" class="modal">
