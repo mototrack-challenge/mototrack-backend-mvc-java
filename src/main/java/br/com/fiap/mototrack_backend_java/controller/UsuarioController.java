@@ -83,4 +83,10 @@ public class UsuarioController {
             return "cadastro-usuario";
         }
     }
+
+    @GetMapping("usuarios/deletar/{id}")
+    public String deletar(@PathVariable Long id) {
+        usuarioService.deletar(id);
+        return "redirect:/usuarios";
+    }
 }

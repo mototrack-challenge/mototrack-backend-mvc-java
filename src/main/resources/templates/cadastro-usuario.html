@@ -19,7 +19,7 @@
         <a href="/usuarios" class="btn_voltar"><i class="fas fa-arrow-left"></i> Voltar para Lista</a>
     </div>
 
-    <form id="form_usuario" th:action="@{usuarios/cadastrar}" th:object="${usuarioDTO}" method="post" class="formulario_cadastro">
+    <form id="form_usuario" th:action="@{/usuarios/cadastrar}" th:object="${usuarioDTO}" method="post" class="formulario_cadastro">
         <div class="formulario_grid">
             <div class="form_grupo form_grupo-full">
                 <label for="nome">Nome Completo <span class="obrigatorio">*</span></label>
@@ -46,7 +46,7 @@
             </div>
 
             <div class="form_botoes">
-                <button type="button" class="btn_cancelar" onclick="window.location.href='/motos'">Cancelar</button>
+                <button type="button" class="btn_cancelar" onclick="window.location.href='/usuarios'">Cancelar</button>
                 <button type="submit" class="btn_cadastrar"><i class="fas fa-save"></i> Cadastrar Usuário</button>
             </div>
 

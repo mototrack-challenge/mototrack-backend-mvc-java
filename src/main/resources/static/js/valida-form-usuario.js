@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const msg = document.getElementById("cadastroSucesso");
         if (msg) {
             setTimeout(() => {
-                window.location.href = "/motos";
+                window.location.href = "/usuarios";
             }, 2000);
         }
     });

@@ -1,6 +1,7 @@
 package br.com.fiap.mototrack_backend_java.service;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
+import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.model.enums.Perfil;
 import br.com.fiap.mototrack_backend_java.repository.UsuarioRepository;
@@ -24,6 +25,12 @@ public class UsuarioService {
         return usuarioRepository.findByFiltros(nome, email);
     }
 
+    @Transactional(readOnly = true)
+    public Usuario buscarPorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário com id: " + id + " não encontrado"));
+    }
+
     @Transactional
     public Usuario salvar(UsuarioRequestDTO usuarioDTO, boolean cadastroPublico) {
         if (usuarioRepository.findByEmail(usuarioDTO.getEmail()).isPresent()) {
@@ -35,5 +42,11 @@ public class UsuarioService {
             usuario.setPerfil(Perfil.COMUM);
         }
         return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void deletar(Long id) {
+        var usuario = buscarPorId(id);
+        usuarioRepository.delete(usuario);
     }
 }
