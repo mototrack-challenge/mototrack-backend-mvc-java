@@ -1,7 +1,6 @@
 package br.com.fiap.mototrack_backend_java.service;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
-import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.model.enums.Perfil;
 import br.com.fiap.mototrack_backend_java.repository.UsuarioRepository;
@@ -42,6 +41,29 @@ public class UsuarioService {
             usuario.setPerfil(Perfil.COMUM);
         }
         return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public Usuario atualizar(Long id, Usuario usuarioNovo) {
+        var usuarioAtual = buscarPorId(id);
+
+        usuarioAtual.setId(id);
+        usuarioAtual.setNome(usuarioNovo.getNome());
+        if (!usuarioAtual.getEmail().equals(usuarioNovo.getEmail())) {
+            if (usuarioRepository.findByEmail(usuarioNovo.getEmail()).isPresent()) {
+                throw new RuntimeException("Este email já está cadastrado.");
+            }
+            usuarioAtual.setEmail(usuarioNovo.getEmail());
+        }
+
+        if (usuarioNovo.getSenha() != null && !usuarioNovo.getSenha().isBlank()) {
+            String senhaCriptografada = passwordEncoder.encode(usuarioNovo.getSenha());
+            usuarioAtual.setSenha(senhaCriptografada);
+        }
+
+        usuarioAtual.setPerfil(usuarioNovo.getPerfil());
+
+        return usuarioRepository.save(usuarioAtual);
     }
 
     @Transactional

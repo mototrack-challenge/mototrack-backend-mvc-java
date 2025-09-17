@@ -1,6 +1,7 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
+import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
 import br.com.fiap.mototrack_backend_java.model.enums.Status;
@@ -81,6 +82,25 @@ public class UsuarioController {
         } catch (Exception e) {
             model.addAttribute("mensagemErro", e.getMessage());
             return "cadastro-usuario";
+        }
+    }
+
+    @GetMapping("/usuarios/editar/{id}")
+    public String editarUsuarioPaginaAdmin(@PathVariable Long id, Model model) {
+        Usuario usuario = usuarioService.buscarPorId(id);
+        model.addAttribute("usuario", usuario);
+        return "editar-usuario";
+    }
+
+    @PostMapping("usuarios/editar/{id}")
+    public String editarUsuarioAdmin(@PathVariable Long id, @ModelAttribute Usuario usuario, Model model) {
+        try {
+            usuarioService.atualizar(id, usuario);
+            model.addAttribute("mensagemSucesso", "Edição de usuário realizado com sucesso!");
+            return "editar-usuario";
+        } catch (Exception e) {
+            model.addAttribute("mensagemErro", e.getMessage());
+            return "editar-usuario";
         }
     }
 

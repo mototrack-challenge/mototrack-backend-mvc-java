@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack - Cadastrar Usuário</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/cadastro-usuario.css}" />
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+    <script th:src="@{/js/valida-form-usuario.js}" defer></script>
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="container_main">
+    <div class="pagina_cabecalho">
+        <h2><i class="fas fa-user-plus"></i> Editar Usuário</h2>
+        <a href="/usuarios" class="btn_voltar"><i class="fas fa-arrow-left"></i> Voltar para Lista</a>
+    </div>
+
+    <form id="form_usuario" th:action="@{'/usuarios/editar/' + ${usuario.id}}" th:object="${usuario}" method="post" class="formulario_cadastro">
+        <div class="formulario_grid">
+            <div class="form_grupo form_grupo-full">
+                <label for="nome">Nome Completo <span class="obrigatorio">*</span></label>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Digite o nome completo" required>
+            </div>
+
+            <div class="form_grupo form_grupo-full">
+                <label for="email">Email <span class="obrigatorio">*</span></label>
+                <input type="email" id="email" th:field="*{email}" placeholder="exemplo@email.com" required>
+            </div>
+
+            <div class="form_grupo">
+                <label for="senha">Senha <span class="obrigatorio">*</span></label>
+                <input type="password" id="senha" th:field="*{senha}" placeholder="Mínimo 6 caracteres" required>
+            </div>
+
+            <div class="form_grupo">
+                <label for="perfil">Tipo de Usuário <span class="obrigatorio">*</span></label>
+                <select id="perfil" th:field="*{perfil}" required>
+                    <option value="" disabled selected>Selecione o tipo</option>
+                    <option th:value="ADMIN">Administrador</option>
+                    <option th:value="COMUM">Usuário Comum</option>
+                </select>
+            </div>
+
+            <div class="form_botoes">
+                <button type="button" class="btn_cancelar" onclick="window.location.href='/usuarios'">Cancelar</button>
+                <button type="submit" class="btn_cadastrar"><i class="fas fa-save"></i> Editar Usuário</button>
+            </div>
+
+        </div>
+
+        <div class="container_mensagem_erro_validacao" id="validacaoMensagem"></div>
+
+        <div class="container_mensagem_cadastro_sucesso" id="cadastroSucesso" th:if="${mensagemSucesso}">
+            <p th:text="${mensagemSucesso}"></p>
+        </div>
+
+        <div class="container_mensagem_cadastro_erro" id="loginMessage">
+            <p th:if="${mensagemErro}" th:text="${mensagemErro}"></p>
+        </div>
+    </form>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+</body>
+</html>
