@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotoTrack - Acesso Não Autorizado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/error.css}" />
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+</head>
+<body>
+    <div th:replace="fragments/header :: headerFragment"></div>
+
+    <main class="container_main">
+        <div class="error-container">
+            <div class="error-icon error-icon-403">
+                <i class="fas fa-ban"></i>
+            </div>
+            <h1 class="error-code error-code-403">403</h1>
+            <h2 class="error-title">Acesso Não Autorizado</h2>
+            <p class="error-message">
+                Você não tem permissão para acessar esta página.
+                Se você acredita que isso é um erro, entre em contato com o administrador do sistema.
+            </p>
+            <div class="error-actions">
+                <a href="/motos" class="btn-primary">
+                    <i class="fas fa-home"></i> Página Inicial
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer :: footerFragment"></div>
+</body>
+</html>

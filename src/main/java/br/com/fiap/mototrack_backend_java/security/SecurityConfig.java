@@ -51,7 +51,9 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
-                );
+                )
+                .exceptionHandling(ex -> ex
+                        .accessDeniedPage("/403"));
 
         return http.build();
     }
