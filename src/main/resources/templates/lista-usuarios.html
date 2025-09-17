@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack - Usuários Cadastrados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
+    <link rel="stylesheet" th:href="@{/css/lista-usuarios.css}" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="container_main">
+    <div class="pagina_cabecalho">
+        <h2><i class="fas fa-users"></i> Usuários Cadastrados</h2>
+        <div class="botoes_lista_usuarios">
+            <a href="/motos" class="btn_voltar"><i class="fas fa-arrow-left"></i> Voltar para Lista</a>
+            <a th:href="@{/usuarios/cadastrar}" class="btn_cadastrar">
+                <i class="fas fa-user-plus"></i> Cadastrar Usuário
+            </a>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filtros_container">
+        <div class="filtros_titulo">
+            <i class="fas fa-filter"></i>
+            <h3>Filtrar Usuários</h3>
+        </div>
+
+        <form id="filtroForm" th:action="@{/usuarios}" method="get" class="filtros_form">
+            <div class="filtro_grupo">
+                <label for="filtroNome">Nome</label>
+                <input type="text" id="filtroNome" name="nome" th:value="${param.nome}" placeholder="Digite o nome do usuário">
+            </div>
+
+            <div class="filtro_grupo">
+                <label for="filtroEmail">Email</label>
+                <input type="text" id="filtroEmail" name="email" th:value="${param.email}" placeholder="Digite o email do usuário">
+            </div>
+        </form>
+
+        <div class="filtros_botoes">
+            <button type="submit" form="filtroForm" class="btn_filtrar">
+                <i class="fas fa-filter"></i> Aplicar Filtros
+            </button>
+            <a th:href="@{/usuarios}" class="btn_limpar">
+                <i class="fas fa-broom"></i> Limpar Filtros
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabela de usuários -->
+    <div class="tabela_container">
+        <table class="tabela_usuarios">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Perfil</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Exemplo de usuários (será substituído pelo Thymeleaf) -->
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.nome}">João Silva</td>
+                <td th:text="${usuario.email}">joao.silva@email.com</td>
+                <td>
+                            <span th:if="${usuario.perfil.toString() == 'ADMIN'}" class="badge_perfil badge_admin">
+                                <i class="fas fa-shield-alt"></i> ADMIN
+                            </span>
+                    <span th:if="${usuario.perfil.toString() == 'COMUM'}" class="badge_perfil badge_comum">
+                                <i class="fas fa-user"></i> COMUM
+                            </span>
+                </td>
+                <td class="acoes_celula">
+                    <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn_acao btn_editar">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                    <a th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}" class="btn_acao btn_excluir">
+                        <i class="fas fa-trash"></i> Excluir
+                    </a>
+                </td>
+            </tr>
+
+            <!-- Mensagem para lista vazia -->
+            <tr th:if="${#lists.isEmpty(usuarios)}">
+                <td colspan="4">
+                    <div class="lista_vazia">
+                        <i class="fas fa-users-slash"></i>
+                        <h3>Nenhum usuário encontrado</h3>
+                        <p th:if="${param.nome != null or param.email != null}">
+                            Tente ajustar os filtros de busca.
+                        </p>
+                        <p th:unless="${param.nome != null or param.email != null}">
+                            Clique no botão "Cadastrar Usuário" para adicionar o primeiro usuário.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+</body>
+</html>

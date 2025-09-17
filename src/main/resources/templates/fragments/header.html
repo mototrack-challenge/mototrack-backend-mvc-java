@@ -15,8 +15,8 @@
     </div>
 
     <div class="cabecalho_botoes">
-        <a th:href="@{/admin/usuarios/cadastrar}" class="btn_cadastro_usuario" sec:authorize="hasAuthority('ADMIN')">
-            <i class="fas fa-user-plus"></i> Cadastrar Usuário
+        <a th:href="@{/usuarios}" class="btn_cadastro_usuario" sec:authorize="hasAuthority('ADMIN')">
+            <i class="fas fa-users"></i> Usuários
         </a>
         <a href="/logout" class="btn_logout">
             <i class="fas fa-sign-out-alt"></i> Logout

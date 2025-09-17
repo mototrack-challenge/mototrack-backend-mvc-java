@@ -1,0 +1,339 @@
+/* Container principal */
+.container_main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Cabeçalho da página */
+.pagina_cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pagina_cabecalho h2 {
+    color: var(--dark-text);
+    font-weight: 700;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pagina_cabecalho h2 i {
+    color: var(--primary);
+}
+
+.botoes_lista_usuarios {
+ display: flex;
+ gap: 7px;
+}
+
+.btn_cadastrar {
+    border: none;
+    cursor: pointer;
+    background: var(--primary);
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn_cadastrar:hover {
+    background: var(--primary-dark);
+}
+
+.btn_voltar {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_voltar:hover {
+  background-color: #f3f4f6;
+}
+
+/* Filtros */
+.filtros_container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 24px;
+}
+
+.filtros_titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.filtros_titulo i {
+    font-size: 20px;
+}
+
+.filtros_form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filtro_grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filtro_grupo label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.filtro_grupo input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--dark-text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.filtro_grupo input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(84, 110, 122, 0.15);
+}
+
+.filtros_botoes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn_filtrar {
+    border: none;
+    cursor: pointer;
+    background: var(--primary);
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn_filtrar:hover {
+    background: var(--primary-dark);
+}
+
+.btn_limpar {
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: transparent;
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn_limpar:hover {
+    background-color: #f3f4f6;
+}
+
+/* Tabela de usuários */
+.tabela_container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    overflow-x: auto;
+}
+
+.tabela_usuarios {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela_usuarios th {
+    background-color: #f8f9fa;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--dark-text);
+    border-bottom: 2px solid var(--border);
+}
+
+.tabela_usuarios td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.tabela_usuarios tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Badge de perfil */
+.badge_perfil {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge_admin {
+    background-color: #e1f5fe;
+    color: #01579b;
+}
+
+.badge_comum {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+/* Ações */
+.acoes_celula {
+    display: flex;
+    gap: 8px;
+}
+
+.btn_acao {
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn_editar {
+    background-color: #e3f2fd;
+    color: var(--info);
+    border: 1px solid #bbdefb;
+}
+
+.btn_editar:hover {
+    background-color: #bbdefb;
+}
+
+.btn_excluir {
+    background-color: #ffebee;
+    color: var(--warning);
+    border: 1px solid #ffcdd2;
+}
+
+.btn_excluir:hover {
+    background-color: #ffcdd2;
+}
+
+/* Mensagem de lista vazia */
+.lista_vazia {
+    text-align: center;
+    padding: 40px;
+    color: var(--light-text);
+}
+
+.lista_vazia i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #cfd8dc;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .pagina_cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filtros_form {
+        grid-template-columns: 1fr;
+    }
+
+    .tabela_usuarios {
+        min-width: 600px;
+    }
+
+    .acoes_celula {
+        flex-direction: column;
+    }
+
+    .btn_acao {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container_main {
+        padding: 0 1rem;
+    }
+
+    .pagina_cabecalho h2 {
+        font-size: 24px;
+    }
+
+    .btn_cadastrar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .filtros_container,
+    .tabela_container {
+        padding: 16px;
+    }
+
+    .filtros_botoes {
+        flex-direction: column;
+    }
+
+    .btn_filtrar,
+    .btn_limpar {
+        width: 100%;
+        justify-content: center;
+    }
+}

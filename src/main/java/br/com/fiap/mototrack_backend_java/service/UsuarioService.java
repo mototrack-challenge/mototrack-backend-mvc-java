@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -17,6 +18,11 @@ public class UsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Transactional(readOnly = true)
+    public List<Usuario> listarUsuarios(String nome, String email) {
+        return usuarioRepository.findByFiltros(nome, email);
+    }
 
     @Transactional
     public Usuario salvar(UsuarioRequestDTO usuarioDTO, boolean cadastroPublico) {

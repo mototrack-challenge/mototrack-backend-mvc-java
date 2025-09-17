@@ -2,6 +2,8 @@ package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
+import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
+import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import br.com.fiap.mototrack_backend_java.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,13 +45,34 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/admin/usuarios/cadastrar")
+    @GetMapping("/usuarios")
+    public String listarTodos(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String email
+            , Model model) {
+
+        var usuarios = usuarioService.listarUsuarios(nome, email);
+
+        if (usuarios.isEmpty()) {
+            if ((nome == null || nome.isBlank()) && (email == null || email.isBlank())) {
+                model.addAttribute("mensagemVazio", true);
+            } else {
+                model.addAttribute("mensagemFiltro", true);
+            }
+        }
+
+        model.addAttribute("usuarios", usuarios);
+
+        return "lista-usuarios";
+    }
+
+    @GetMapping("/usuarios/cadastrar")
     public String cadastroUsuarioPaginaAdmin(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioRequestDTO());
         return "cadastro-usuario";
     }
 
-    @PostMapping("/admin/usuarios/cadastrar")
+    @PostMapping("/usuarios/cadastrar")
     public String cadastrarUsuarioAdmin(@ModelAttribute("usuarioDTO") UsuarioRequestDTO usuarioDTO, Model model) {
         try {
             Usuario usuario = usuarioService.salvar(usuarioDTO, false);
