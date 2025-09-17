@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const msg = document.getElementById("cadastroSucesso");
         if (msg) {
             setTimeout(() => {
-                window.location.href = "/login";
+                window.location.href = "/motos";
             }, 2000);
         }
     });
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+document.getElementById("form_usuario").addEventListener("submit", function(event) {
     let valido = true;
     let mensagens = [];
 
@@ -27,7 +27,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     }
 
     // Senha
-    const senha = document.getElementById("password").value.trim();
+    const senha = document.getElementById("senha").value.trim();
     if (senha.length < 6 || senha.length > 150) {
         mensagens.push("A senha deve ter entre 6 e 150 caracteres.");
         valido = false;

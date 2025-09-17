@@ -68,27 +68,98 @@ body {
   font-size: 24px;
 }
 
-.logo_botao a {
-    border: 1px solid var(--border);
-    cursor: pointer;
-    background: white;
-    font-size: 15px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    color: var(--dark-text);
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: var(--card-shadow);
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.cabecalho_botoes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-.logo_botao a:hover {
+.btn_cadastro_usuario {
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_cadastro_usuario:hover {
+  background: var(--primary-dark);
+}
+
+.btn_logout {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn_logout:hover {
   background-color: #f3f4f6;
 }
 
 button {
   font-family: var(--font);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .cabecalho {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .cabecalho_botoes {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn_cadastro_usuario,
+  .btn_logout {
+    flex: 1;
+    justify-content: center;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho_botoes {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn_cadastro_usuario,
+  .btn_logout {
+    width: 100%;
+  }
+
+  .logo {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
 }

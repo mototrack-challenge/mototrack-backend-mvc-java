@@ -42,4 +42,22 @@ public class UsuarioController {
             return "cadastro";
         }
     }
+
+    @GetMapping("/admin/usuarios/cadastrar")
+    public String cadastroUsuarioPaginaAdmin(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioRequestDTO());
+        return "cadastro-usuario";
+    }
+
+    @PostMapping("/admin/usuarios/cadastrar")
+    public String cadastrarUsuarioAdmin(@ModelAttribute("usuarioDTO") UsuarioRequestDTO usuarioDTO, Model model) {
+        try {
+            Usuario usuario = usuarioService.salvar(usuarioDTO, false);
+            model.addAttribute("mensagemSucesso", "Cadastro de usuário realizado com sucesso!");
+            return "cadastro-usuario";
+        } catch (Exception e) {
+            model.addAttribute("mensagemErro", e.getMessage());
+            return "cadastro-usuario";
+        }
+    }
 }

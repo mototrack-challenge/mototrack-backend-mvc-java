@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,15 +8,20 @@
     <link rel="stylesheet" th:href="@{/css/cabecalho-rodape.css}" />
 </head>
 <body>
-    <header class="cabecalho" th:fragment="headerFragment">
-        <div class="logo">
-            <img th:src="@{/img/logo-azul.png}" alt="logo" />
-            <h1>MotoTrack</h1>
-        </div>
+<header class="cabecalho" th:fragment="headerFragment">
+    <div class="logo">
+        <img th:src="@{/img/logo-azul.png}" alt="logo" />
+        <h1>MotoTrack</h1>
+    </div>
 
-        <div class="logo_botao">
-            <a href="/logout" class="btn_logout">Logout</a>
-        </div>
-    </header>
+    <div class="cabecalho_botoes">
+        <a th:href="@{/admin/usuarios/cadastrar}" class="btn_cadastro_usuario" sec:authorize="hasAuthority('ADMIN')">
+            <i class="fas fa-user-plus"></i> Cadastrar Usuário
+        </a>
+        <a href="/logout" class="btn_logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+</header>
 </body>
 </html>
