@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -99,8 +99,8 @@
       <section class="secao_lista_motos">
         <div class="lista_motos_header">
           <h2>Motos Cadastradas</h2>
-          <a href="/motos/cadastrar" class="btn_criar_moto"
-            ><i class="fas fa-plus"></i> Cadastrar Moto</a
+          <a href="/motos/cadastrar" class="btn_criar_moto" sec:authorize="hasAuthority('ADMIN')">
+            <i class="fas fa-plus"></i>Cadastrar Moto</a
           >
         </div>
 
@@ -167,7 +167,7 @@
             </div>
 
             <div class="botoes_card_moto">
-              <a th:href="@{'/motos/editar/' + ${moto.id}}" class="btn_card_moto btn_editar_moto">
+              <a th:href="@{'/motos/editar/' + ${moto.id}}" class="btn_card_moto btn_editar_moto" sec:authorize="hasAuthority('ADMIN')">
                 <i class="fas fa-edit"></i> Editar
               </a>
               <a th:href="@{'/movimentacoes/moto/' + ${moto.id}}" class="btn_card_moto btn_movimentacoes">
@@ -176,7 +176,7 @@
               <a th:href="@{'/alertas/moto/' + ${moto.id}}" class="btn_card_moto btn_alertas">
                 <i class="fas fa-bell"></i> Alertas
               </a>
-              <button class="btn_card_moto btn_deletar_moto" th:onclick="'abrirModal(' + ${moto.id} + ')'">
+              <button class="btn_card_moto btn_deletar_moto" th:onclick="'abrirModal(' + ${moto.id} + ')'" sec:authorize="hasAuthority('ADMIN')">
                 <i class="fas fa-trash"></i> Deletar
               </button>
             </div>

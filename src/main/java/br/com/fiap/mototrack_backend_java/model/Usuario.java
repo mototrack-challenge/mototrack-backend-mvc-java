@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import br.com.fiap.mototrack_backend_java.model.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +29,10 @@ public class Usuario {
 
     @Column(nullable = false, length = 150)
     private String senha;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "perfil", nullable = false, length = 20)
+    private Perfil perfil;
 
     @Column(name = "data_criacao", updatable = false)
     private LocalDateTime dataCriacao;

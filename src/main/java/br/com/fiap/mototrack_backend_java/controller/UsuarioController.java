@@ -34,7 +34,7 @@ public class UsuarioController {
     @PostMapping("/cadastrar")
     public String cadastrarUsuario(@ModelAttribute("usuarioDTO") UsuarioRequestDTO usuarioDTO, Model model) {
         try {
-            Usuario usuario = usuarioService.salvar(usuarioDTO);
+            Usuario usuario = usuarioService.salvar(usuarioDTO, true);
             model.addAttribute("mensagemSucesso", "Cadastro realizado com sucesso! Você será redirecionado para o login.");
             return "cadastro";
         } catch (Exception e) {

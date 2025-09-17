@@ -22,10 +22,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
+        String role = usuario.getPerfil().name();
+
         return new org.springframework.security.core.userdetails.User(
                 usuario.getEmail(),
                 usuario.getSenha(),
-                Collections.singleton(new SimpleGrantedAuthority("USER")) // roles
+                Collections.singleton(new SimpleGrantedAuthority(role))
         );
     }
 }

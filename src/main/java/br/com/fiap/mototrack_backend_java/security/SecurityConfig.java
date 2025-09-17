@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/cadastrar", "/css/**", "/js/**", "img/**").permitAll()
+                        .requestMatchers("motos/cadastrar", "motos/editar/**", "motos/deletar/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
