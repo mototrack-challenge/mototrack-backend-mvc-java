@@ -38,7 +38,7 @@
                 <p><strong>Chassi:</strong> <span th:text="${moto.chassi}">Chassi</span></p>
                 <p><strong>Status atual:</strong> <span th:text="${moto.status.name() == 'AVALIACAO' ? 'Avaliação' :
                     moto.status.name() == 'MANUTENCAO' ? 'Manutenção' :
-                    moto.status.name() == 'PRONTA_PARA_USO' ? 'Disponível' : moto.status.name()}">
+                    moto.status.name() == 'DISPONIVEL' ? 'Disponível' : moto.status.name()}">
                 </span></p>
             </div>
         </div>

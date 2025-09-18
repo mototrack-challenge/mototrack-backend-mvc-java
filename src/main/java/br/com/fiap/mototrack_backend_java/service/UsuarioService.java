@@ -44,6 +44,23 @@ public class UsuarioService {
     }
 
     @Transactional
+    public Usuario salvarAdminInicial() {
+        String emailAdmin = "admin@email.com";
+
+        if (usuarioRepository.findByEmail(emailAdmin).isPresent()) {
+            return usuarioRepository.findByEmail(emailAdmin).get();
+        }
+
+        Usuario admin = new Usuario();
+        admin.setNome("Administrador");
+        admin.setEmail(emailAdmin);
+        admin.setSenha(passwordEncoder.encode("admin123"));
+        admin.setPerfil(Perfil.ADMIN);
+
+        return usuarioRepository.save(admin);
+    }
+
+    @Transactional
     public Usuario atualizar(Long id, Usuario usuarioNovo) {
         var usuarioAtual = buscarPorId(id);
 

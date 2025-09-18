@@ -1,10 +1,7 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
-import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
-import br.com.fiap.mototrack_backend_java.model.enums.ModeloMoto;
-import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import br.com.fiap.mototrack_backend_java.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -78,7 +78,7 @@
                 <label for="status">Status</label>
                 <select id="status" name="status" th:value="${param.status}">
                   <option value="">Selecione um status</option>
-                  <option value="PRONTA_PARA_USO">Disponível</option>
+                  <option value="DISPONIVEL">Disponível</option>
                   <option value="AVALIACAO">Em avaliação</option>
                   <option value="MANUTENCAO">Em manutenção</option>
                 </select>
@@ -118,10 +118,10 @@
           <span class="status_badge"
                 th:classappend="${moto.status.name() == 'AVALIACAO' ? 'status-em_analise' :
                        moto.status.name() == 'MANUTENCAO' ? 'status-em_manutencao' :
-                       moto.status.name() == 'PRONTA_PARA_USO' ? 'status-disponivel' : ''}"
+                       moto.status.name() == 'DISPONIVEL' ? 'status-disponivel' : ''}"
                 th:text="${moto.status.name() == 'AVALIACAO' ? 'Avaliação' :
                 moto.status.name() == 'MANUTENCAO' ? 'Manutenção' :
-                moto.status.name() == 'PRONTA_PARA_USO' ? 'Disponível' : moto.status.name()}">
+                moto.status.name() == 'DISPONIVEL' ? 'Disponível' : moto.status.name()}">
           </span>
 
             <div class="moto_card_cabecalho">
