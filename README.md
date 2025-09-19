@@ -1,4 +1,4 @@
-# 🏍️ MotoTrack - Backend API REST (Java)
+# 🏍️ MotoTrack - Backend MVC (Java)
 
 ## 👥 Integrantes
 
