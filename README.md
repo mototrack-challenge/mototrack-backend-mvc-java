@@ -8,14 +8,14 @@
 
 ## 📌 Sumário
 
-- [📝 Descrição do Projeto](#descrição-do-projeto)  
-- [🗄️ Modelagem do Banco de Dados](#modelagem-do-banco-de-dados)  
-- [🚀 Como Rodar o Projeto MotoTrack Completo](#como-rodar-o-projeto-mototrack-completo)  
-- [🖥️ Detalhes do Projeto MVC (Java)](#detalhes-do-projeto-mvc-java)  
-- [🚀 Como Rodar o Projeto MVC (Java)](#como-rodar-o-projeto-mvc-java)  
-- [📹 Demonstração em Vídeo](#demonstração-em-vídeo)    
+- [📝 Descrição da Solução](#📝-descrição-da-solução)  
+- [🗄️ Modelagem do Banco de Dados](#🗄️-modelagem-do-banco-de-dados)  
+- [🚀 Como Rodar o Projeto MotoTrack Completo](#🚀-como-rodar-o-projeto-mototrack-completo)  
+- [🖥️ Detalhes do Projeto MVC (Java)](#🖥️-detalhes-do-projeto-mvc-java)  
+- [🚀 Como Rodar o Projeto MVC (Java)](#🚀-como-rodar-o-projeto-mvc-java)  
+- [📹 Demonstração em Vídeo](#📹-demonstração-em-vídeo)    
 
-## 📝 Descrição do Projeto
+## 📝 Descrição da Solução
 
 O **MotoTrack** é um sistema completo desenvolvido para auxiliar empresas de aluguel de motos, como a Mottu, no **controle e monitoramento de sua frota**. 
 A aplicação foi criada para resolver problemas comuns de gestão, como a desorganização nos pátios, dificuldade em localizar motos disponíveis ou em manutenção, 
