@@ -8,12 +8,12 @@
 
 ## 📌 Sumário
 
-- [📝 Descrição da Solução](#📝-descrição-da-solução)  
-- [🗄️ Modelagem do Banco de Dados](#🗄️-modelagem-do-banco-de-dados)  
-- [🚀 Como Rodar o Projeto MotoTrack Completo](#🚀-como-rodar-o-projeto-mototrack-completo)  
-- [🖥️ Detalhes do Projeto MVC (Java)](#🖥️-detalhes-do-projeto-mvc-java)  
-- [🚀 Como Rodar o Projeto MVC (Java)](#🚀-como-rodar-o-projeto-mvc-java)  
-- [📹 Demonstração em Vídeo](#📹-demonstração-em-vídeo)    
+- [📝 Descrição da Solução](#-descrição-da-solução)  
+- [🗄️ Modelagem do Banco de Dados](#️-modelagem-do-banco-de-dados)  
+- [🚀 Como Rodar o Projeto MotoTrack Completo](#-como-rodar-o-projeto-mototrack-completo)  
+- [🖥️ Detalhes do Projeto MVC (Java)](#️-detalhes-do-projeto-mvc-java)  
+- [🚀 Como Rodar o Projeto MVC (Java)](#-como-rodar-o-projeto-mvc-java)  
+- [📹 Demonstração em Vídeo](#-demonstração-em-vídeo)  
 
 ## 📝 Descrição da Solução
 
