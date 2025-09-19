@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Alerta {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alerta_seq")
-    @SequenceGenerator(name = "alerta_seq", sequenceName = "ALERTA_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "alerta_seq", sequenceName = "SEQ_MT_ALERTAS", allocationSize = 1)
     @Column(name = "id_alerta")
     @JsonProperty("id_alerta")
     private Long id;

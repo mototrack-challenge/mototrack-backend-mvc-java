@@ -19,7 +19,7 @@ public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departamento_seq")
-    @SequenceGenerator(name = "departamento_seq", sequenceName = "DEPARTAMENTO_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "departamento_seq", sequenceName = "SEQ_MT_DEPARTAMENTOS", allocationSize = 1)
     @Column(name = "id_departamento")
     @JsonProperty("id_departamento")
     private Long id;

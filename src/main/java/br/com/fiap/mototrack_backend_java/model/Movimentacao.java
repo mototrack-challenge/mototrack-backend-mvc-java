@@ -18,7 +18,7 @@ public class Movimentacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movimentacao_seq")
-    @SequenceGenerator(name = "movimentacao_seq", sequenceName = "MOVIMENTACAO_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "movimentacao_seq", sequenceName = "SEQ_MT_MOVIMENTACOES", allocationSize = 1)
     @Column(name = "id_movimentacao")
     @JsonProperty("id_movimentacao")
     private Long id;
