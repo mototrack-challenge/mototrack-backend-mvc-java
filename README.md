@@ -98,7 +98,8 @@ O projeto utiliza as seguintes tecnologias e bibliotecas principais:
 - **Spring MVC** – desenvolvimento do backend web e controllers  
 - **Spring Security** – autenticação e autorização  
 - **Spring Data JPA** – integração com o **Oracle Database**  
-- **Thymeleaf** – renderização de páginas HTML   
+- **Thymeleaf** – renderização de páginas HTML
+- **Flyway** – versionamento e migração automática do banco de dados 
 - **Maven** – gerenciamento de dependências e build do projeto
 
 ### 🔐 Segurança e Perfis de Usuário
