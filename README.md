@@ -40,14 +40,15 @@ O projeto foi dividido em múltiplos módulos para facilitar **escalabilidade e 
 - 🖥️ **Backend MVC em Java (Spring MVC)** – oferece as mesmas entidades do backend REST Java, com um **frontend web bonito e funcional**, permitindo cadastro, edição, listagem e exclusão de dados diretamente pelo navegador. Possui **Spring Security** com validação de tipo de usuário (**Administrador** e **Comum**) para controlar o acesso às funcionalidades.
 - 🧩 **Backend REST em .NET (ASP.NET Core)** – gerencia as entidades de **moto (somente leitura das tabelas criadas pelo Java), colaboradores, serviços e peças**, integrando funcionalidades complementares ao sistema.  
 - 📱 **Frontend Mobile (React Native/Expo)** – consome ambas as APIs (Java e .NET) e disponibiliza **telas de cadastro, edição, exclusão e visualização** das funcionalidades, incluindo serviços, colaboradores e estoque de peças.  
-- 🗄️ **Banco de Dados Oracle** – utilizado por todos os backends, com **criação automática de tabelas** ao iniciar os projetos.  
+- 🗄️ **Banco de Dados Oracle** – utilizado por todos os backends, com **criação automática de tabelas** ao iniciar os projetos.
+- ☁️ **Cloud (Azure)** – responsável por hospedar o **Backend MVC Java** e o **banco de dados PostgreSQL**, utilizando **Azure App Service** para a aplicação e **Azure Database for PostgreSQL** para persistência. Essa camada garante **acessibilidade, escalabilidade e disponibilidade** do sistema em ambiente de nuvem.
 
 ---
 
 ## 🗄️ Modelagem do Banco de Dados
 Abaixo está a modelagem das tabelas utilizadas pelo sistema:  
 
-![Tela de Login](docs/modelagem-moto-track.png)
+![Modelagem Banco de Dados](docs/modelagem-moto-track.png)
 
 ---
 
@@ -70,6 +71,7 @@ Para utilizar o **MotoTrack** de forma completa, é necessário rodar simultanea
    - [API Rest .NET](https://github.com/mototrack-challenge/mototrack-backend-rest-dotnet)  
    - [Mobile](https://github.com/mototrack-challenge/mototrack-frontend-mobile)  
    - [MVC Java](https://github.com/mototrack-challenge/mototrack-backend-mvc-java)
+   - [Cloud](https://github.com/mototrack-challenge/mototrack-cloud)
 
 2. 🔌 Configure as credenciais de conexão com o banco Oracle nos arquivos de configuração dos backends, se necessário.
     - ✅ O banco de dados e as tabelas serão **criados automaticamente** ao iniciar os backends (Java REST, Java MVC e .NET)
@@ -85,6 +87,12 @@ Para utilizar o **MotoTrack** de forma completa, é necessário rodar simultanea
 > ⚠️ Dica: primeiro inicie os backends para que o mobile consiga se conectar às APIs corretamente
 
 5. 🖥️ Para testar o **MVC Java**, basta executar o projeto normalmente; ele funciona isoladamente, sem depender dos outros módulos
+
+### ☁️ Opcional: Deploy em Cloud (Azure)
+
+Também é possível executar o **MotoTrack MVC Java** diretamente na nuvem, utilizando **Azure App Service** e **Azure Database for PostgreSQL**.
+- O passo a passo completo para realizar o deploy está descrito no repositório:  
+  👉 [MotoTrack Cloud](https://github.com/mototrack-challenge/mototrack-cloud)
 
 ---
 
