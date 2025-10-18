@@ -193,7 +193,7 @@ Para executar o **MotoTrack MVC Java**, siga os passos abaixo:
 
 Para ver o **MotoTrack MVC Java** em funcionamento, assista ao vídeo abaixo, onde o projeto é executado e suas principais funcionalidades são demonstradas:  
 
-🎥 [Assista à demonstração completa](https://www.youtube.com/watch?v=h_PNwJsyep4)
+🎥 [Assista à demonstração completa](https://www.youtube.com/watch?v=veq9pSnL0cI)
 
 Além disso, o projeto está **disponível online**, com **deploy realizado na plataforma Render**, permitindo acesso direto à aplicação hospedada:
 
