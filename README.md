@@ -193,7 +193,15 @@ Para executar o **MotoTrack MVC Java**, siga os passos abaixo:
 
 Para ver o **MotoTrack MVC Java** em funcionamento, assista ao vídeo abaixo, onde o projeto é executado e suas principais funcionalidades são demonstradas:  
 
-🎥 [Assista à demonstração completa](https://www.youtube.com/watch?v=h_PNwJsyep4)  
+🎥 [Assista à demonstração completa](https://www.youtube.com/watch?v=h_PNwJsyep4)
+
+Além disso, o projeto está **disponível online**, com **deploy realizado na plataforma Render**, permitindo acesso direto à aplicação hospedada:
+
+**🌐 Acesse o MotoTrack MVC Online:**
+
+👉 [https://mototrack-mvc-java.onrender.com](https://mototrack-mvc-java.onrender.com/)
+
+> 💡 O deploy foi feito no Render para fins de demonstração gratuita, evitando custos durante o desenvolvimento, mantendo todas as funcionalidades do sistema acessíveis na web.
 
 No vídeo, você verá:  
 - Login e cadastro de usuários (admin e comum)  
